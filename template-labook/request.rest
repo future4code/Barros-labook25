@@ -1,0 +1,10 @@
+### Endpoit para Criar Uuário
+
+POST http://localhost:3003/users
+Content-Type: application/json
+
+{
+    "mane": "Ricardo",
+    "email": "email@example.com",
+    "password": "123456"
+}
