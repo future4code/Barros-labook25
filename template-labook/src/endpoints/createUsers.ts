@@ -2,6 +2,7 @@ import { connection } from "../dataBase/connection"
 import  {Request, Response } from "express"
 import express, { Express} from "express"
 import cors from "express"
+import { Users } from "../class/Users"
 
 const app: Express = express()
 app.use(express.json())
@@ -12,6 +13,8 @@ export const createUsers = async (req: Request, res: Response) => {
    try {
       let message = "Success!"
       const { name, email, password } = req.body
+
+      const newUser = new Users(name, email, password)
 
       if (!name || !email || !password) {
          res.statusCode = 406
@@ -24,9 +27,9 @@ export const createUsers = async (req: Request, res: Response) => {
       await connection('labook_users')
          .insert({
             id,
-            name,
-            email,
-            password
+            name: newUser.setName(),
+            email: newUser.setEmail(),
+            password: newUser.setPassword()
          })
 
       res.status(201).send({ message })
