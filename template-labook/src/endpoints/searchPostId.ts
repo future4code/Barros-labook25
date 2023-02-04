@@ -2,6 +2,8 @@ import { connection } from "../dataBase/connection"
 import  {Request, Response } from "express"
 import express, { Express} from "express"
 import cors from "express"
+import { post } from "../models/types"
+
 
 const app: Express = express()
 app.use(express.json())
@@ -12,7 +14,7 @@ export const searchPostId = async (req: Request, res: Response) => {
     try {
        let message = "Success!"
  
-       const { id } = req.params
+       const { id } = req.body
  
        const queryResult: any = await connection("labook_posts")
           .select("*")
